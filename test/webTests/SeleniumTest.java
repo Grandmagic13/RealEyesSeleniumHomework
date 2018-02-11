@@ -15,8 +15,6 @@ public class SeleniumTest {
 
 	@BeforeClass
 	public static void setUp() {
-		// System.setProperty("webdriver.gecko.driver",
-		// "C:\\Users\\BenceHome\\geckodriver-v0.19.1-win64\\geckodriver.exe");
 		String browserType = System.getProperty("browsertype");
 		if (browserType.equals("firefox")) {
 			driver = new FirefoxDriver();
