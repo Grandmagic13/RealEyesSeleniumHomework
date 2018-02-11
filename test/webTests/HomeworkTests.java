@@ -1,10 +1,11 @@
 package webTests;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.junit.internal.TextListener;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
 
 import webObjects.WebAutoPage;
 
@@ -53,5 +54,18 @@ public class HomeworkTests extends SeleniumTest {
 		WebAutoPage webAutoPage = new WebAutoPage(driver);
 		assertTrue(webAutoPage.isInitialized());
 		return webAutoPage;
+	}
+
+	public static void main(String args[]) {
+		JUnitCore junit = new JUnitCore();
+		junit.addListener(new TextListener(System.out));
+		Result result = junit.run(HomeworkTests.class);
+		if (result.getFailureCount() > 0) {
+			System.out.println("Test failed.");
+			System.exit(1);
+		} else {
+			System.out.println("Test finished successfully.");
+			System.exit(0);
+		}
 	}
 }
