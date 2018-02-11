@@ -52,14 +52,22 @@ public class WebAutoPage extends PageObject {
 	}
 
 	public void divideSevenByZero() {
-		WebElement seven = getButtonByText("7");
-		WebElement zero = getButtonByText("0");
+		doOperationWithTwoNumbers("7", "0", "/");
+	}
+
+	public void multiplySevenByFive() {
+		doOperationWithTwoNumbers("7", "5", "*");
+	}
+
+	private void doOperationWithTwoNumbers(String num1, String num2, String operation) {
+		WebElement firstNumber = getButtonByText(num1);
+		WebElement secondNumber = getButtonByText(num2);
 		WebElement equals = getButtonByText("=");
 		Select operationSelector = new Select(driver.findElement(By.tagName("select")));
 
-		seven.click();
-		operationSelector.selectByValue("/");
-		zero.click();
+		firstNumber.click();
+		operationSelector.selectByValue(operation);
+		secondNumber.click();
 		equals.click();
 	}
 
@@ -79,6 +87,10 @@ public class WebAutoPage extends PageObject {
 
 	public void closeAlert() {
 		getAlertPopup().accept();
+	}
+
+	public String getResult() {
+		return driver.findElement(By.className("result-val")).getText();
 	}
 
 	private Alert getAlertPopup() {
